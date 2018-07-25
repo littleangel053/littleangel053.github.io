@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      中缀表达式的直接计算，并实现简单的计算器 | 管安琪de博客 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="管安琪">
+    
+    
+
+    <meta name="description" content="在前一篇博客中，我们学习了中缀转后缀，后缀直接计算的发方法，那么接下来我们就来将他们二合一，直接中缀运算只有在出栈的时候，不一样，我们遇到括号往外弹的时候不让它入栈了，而是让数栈里面直接两次pop，运算符栈弹出一个进行直接运算，详情代码如下12345678910111213141516171819202122232425262728293031323334353637383940414243444">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中缀表达式的直接计算，并实现简单的计算器 | 管安琪de博客">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/中缀表达式的直接计算/index.html">
+<meta property="og:site_name" content="管安琪de博客">
+<meta property="og:description" content="在前一篇博客中，我们学习了中缀转后缀，后缀直接计算的发方法，那么接下来我们就来将他们二合一，直接中缀运算只有在出栈的时候，不一样，我们遇到括号往外弹的时候不让它入栈了，而是让数栈里面直接两次pop，运算符栈弹出一个进行直接运算，详情代码如下12345678910111213141516171819202122232425262728293031323334353637383940414243444">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-25T03:49:20.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="中缀表达式的直接计算，并实现简单的计算器 | 管安琪de博客">
+<meta name="twitter:description" content="在前一篇博客中，我们学习了中缀转后缀，后缀直接计算的发方法，那么接下来我们就来将他们二合一，直接中缀运算只有在出栈的时候，不一样，我们遇到括号往外弹的时候不让它入栈了，而是让数栈里面直接两次pop，运算符栈弹出一个进行直接运算，详情代码如下12345678910111213141516171819202122232425262728293031323334353637383940414243444">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">管安琪de博客</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">中缀表达式的直接计算，并实现简单的计算器</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-07-20" class="post-meta__date date">2018-07-20</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h3 id="在前一篇博客中，我们学习了中缀转后缀，后缀直接计算的发方法，那么接下来我们就来将他们二合一，直接中缀运算"><a href="#在前一篇博客中，我们学习了中缀转后缀，后缀直接计算的发方法，那么接下来我们就来将他们二合一，直接中缀运算" class="headerlink" title="在前一篇博客中，我们学习了中缀转后缀，后缀直接计算的发方法，那么接下来我们就来将他们二合一，直接中缀运算"></a>在前一篇博客中，我们学习了中缀转后缀，后缀直接计算的发方法，那么接下来我们就来将他们二合一，直接中缀运算</h3><h4 id="只有在出栈的时候，不一样，我们遇到括号往外弹的时候不让它入栈了，而是让数栈里面直接两次pop，运算符栈弹出一个进行直接运算，详情代码如下"><a href="#只有在出栈的时候，不一样，我们遇到括号往外弹的时候不让它入栈了，而是让数栈里面直接两次pop，运算符栈弹出一个进行直接运算，详情代码如下" class="headerlink" title="只有在出栈的时候，不一样，我们遇到括号往外弹的时候不让它入栈了，而是让数栈里面直接两次pop，运算符栈弹出一个进行直接运算，详情代码如下"></a>只有在出栈的时候，不一样，我们遇到括号往外弹的时候不让它入栈了，而是让数栈里面直接两次pop，运算符栈弹出一个进行直接运算，详情代码如下</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">function infix2(str)&#123;</span><br><span class="line">     var sign = [];//运算数组</span><br><span class="line">     var result = [];//结果数组</span><br><span class="line">     sign.push(&quot;#&quot;);//在栈底放入一个#，遇到#代表到底了</span><br><span class="line">     for(var i = 0;i&lt;str.length;i++)&#123;//判断数字，注意你打的是字符串要转化成数字</span><br><span class="line">        if(!isNaN(parseInt(str[i])))&#123;//js判断是不是数字的方法</span><br><span class="line">            result.push(parseInt(str[i]));//是据放入结果栈</span><br><span class="line">        &#125;  </span><br><span class="line">        else&#123;//开始判断运算符</span><br><span class="line">            if(str[i]==&apos;(&apos;)&#123;//是“（ ”直接放入运算符栈</span><br><span class="line">                sign.push(str[i]);</span><br><span class="line">             &#125;</span><br><span class="line">            else if(str[i]==&apos;)&apos;)&#123;//是“ ）”把到“（ ”之间的全都出栈到结果栈</span><br><span class="line">                 while(sign[sign.length-1]!=&apos;(&apos;)&#123;//这里略有不同，就是结果栈里有元素的时候直接运算</span><br><span class="line">                     var b=result.pop();//是结果栈顶的第一个元素先出来</span><br><span class="line">                     var a=result.pop();//就是栈顶后面的元素，即就是运算符前相邻的两个数运算</span><br><span class="line">                     var c=sign.pop();//这个是从运算域出一个运算符来运算</span><br><span class="line">                     switch(c)&#123;</span><br><span class="line">                     case &apos;+&apos;:result.push(a+b);</span><br><span class="line">                     break;</span><br><span class="line">                     case &apos;-&apos;:result.push(a-b);//+和*倒是没有什么，/和-要注意是后来的数去运算前面的</span><br><span class="line">                     break;</span><br><span class="line">                     case &apos;*&apos;:result.push(a*b);</span><br><span class="line">                     break;</span><br><span class="line">                     case &apos;/&apos;:result.push(a/b);</span><br><span class="line">                     break;</span><br><span class="line">                     &#125;</span><br><span class="line">                 &#125;</span><br><span class="line">                 sign.pop();</span><br><span class="line">             &#125;</span><br><span class="line">             else&#123;</span><br><span class="line">                 var daxiao=get(sign[sign.length-1],str[i])//比较栈顶元素sign[sign.length-1]与要入栈元素</span><br><span class="line">                 if(daxiao==-1)&#123;//后来的元素大，直接放入栈</span><br><span class="line">                     sign.push(str[i]);</span><br><span class="line">                 &#125;</span><br><span class="line">                 else if(daxiao&gt;=0)&#123;//其余情况不是后面的小就是一样，那么需要把比你后来大的运算符出栈到结果栈</span><br><span class="line">                     do&#123;//这回是直接出去一个运算符就直接运算，直到运算符不再往结果域去</span><br><span class="line">                         var b=result.pop();//是栈顶的元素</span><br><span class="line">                         var a=result.pop();//就是栈顶后面的元素，即就是运算符前相邻的两个数运算</span><br><span class="line">                         var c=sign.pop();</span><br><span class="line">                         switch(c)&#123;</span><br><span class="line">                         case &apos;+&apos;:result.push(a+b);</span><br><span class="line">                         break;</span><br><span class="line">                         case &apos;-&apos;:result.push(a-b);//+和*倒是没有什么，/和-要注意是后来的数去运算前面的</span><br><span class="line">                         break;</span><br><span class="line">                         case &apos;*&apos;:result.push(a*b);</span><br><span class="line">                         break;</span><br><span class="line">                         case &apos;/&apos;:result.push(a/b);</span><br><span class="line">                         break;</span><br><span class="line">                         &#125;</span><br><span class="line">                     &#125;while(get(sign[sign.length-1],str[i])&gt;0);//满足里面的大就进入循环，不大跳出来</span><br><span class="line">                     sign.push(str[i]);//最后你要把你想放进去的运算符最后放进去</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     return result[0];//最后把后缀表达式写出来</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="接下来我们就可以来写一个基本的计算器了，这里贴出一些其他的异常处理"><a href="#接下来我们就可以来写一个基本的计算器了，这里贴出一些其他的异常处理" class="headerlink" title="接下来我们就可以来写一个基本的计算器了，这里贴出一些其他的异常处理"></a>接下来我们就可以来写一个基本的计算器了，这里贴出一些其他的异常处理</h4><h5 id="例如；小数点异常处理"><a href="#例如；小数点异常处理" class="headerlink" title="例如；小数点异常处理"></a>例如；小数点异常处理</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$function xiaoshudian()&#123;//小数点重复的判断</span><br><span class="line">    var jian=[];</span><br><span class="line">    jian.push(&quot;#&quot;)</span><br><span class="line">    var show=document.getElementById(&quot;show&quot;).value;</span><br><span class="line">    for (var i = 0; i &lt; show.length; i++) </span><br><span class="line">    &#123;</span><br><span class="line">        if (show[i] == &quot;.&quot;) </span><br><span class="line">        &#123;//判断遇没遇见小数点，如果遇见了你就把小数点放入你新建的栈</span><br><span class="line">            jian.push(show[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        else if(show[i]==&apos;+&apos;||show[i]==&apos;-&apos;||show[i]==&apos;*&apos;||show[i]==&apos;/&apos;)</span><br><span class="line">        &#123;</span><br><span class="line">            //你判断只要后面遇见运算符，就进入下面的判断</span><br><span class="line">            //其实这是在干嘛呢，就是每一个数字后面是跟着运算符的，只有最后一个的时候没有，后面再说这种情况</span><br><span class="line">            //数分带小数和不带的，不带的就直接</span><br><span class="line">            if(jian[jian.length-1]==&quot;.&quot;)&#123;</span><br><span class="line">                jian.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(jian[jian.length-1]==&apos;.&apos;)&#123;</span><br><span class="line">        jian.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    if(jian[jian.length-1]!=&quot;#&quot;)&#123;//就是除了最后一个数之外，每一个小数点后面都跟着一个运算符</span><br><span class="line">        //每有一个运算符就要出栈一个小数点，那么最后一定留下的是“#”，若不是则说明小数点多了（不存在小数点少了的情况）</span><br><span class="line">        alert(&quot;小数点不匹配&quot;);</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="例如；运算符异常处理"><a href="#例如；运算符异常处理" class="headerlink" title="例如；运算符异常处理"></a>例如；运算符异常处理</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$function yunsuanfu(res)&#123;//运算符多余的判断</span><br><span class="line">    var show=document.getElementById(&quot;show&quot;);</span><br><span class="line">        if (show.value[show.value.length-1] == &quot;+&quot;||show.value[show.value.length-1] == &quot;-&quot;||show.value[show.value.length-1] == &quot;*&quot;||show.value[show.value.length-1] == &quot;/&quot;) &#123;</span><br><span class="line">            shanchu();</span><br><span class="line">            show.value+=res.value;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            document.getElementById(&quot;show&quot;).value +=res.value;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="AC的处理"><a href="#AC的处理" class="headerlink" title="AC的处理"></a>AC的处理</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$function over() &#123;//AC的处理</span><br><span class="line">    var show = document.getElementById(&quot;show&quot;);</span><br><span class="line">    show.value = &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="阶乘处理"><a href="#阶乘处理" class="headerlink" title="阶乘处理"></a>阶乘处理</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$function jiecheng() &#123;//阶乘处理</span><br><span class="line">    var show = document.getElementById(&quot;show&quot;);</span><br><span class="line">    var n = (show.value);</span><br><span class="line">    var result = 1;</span><br><span class="line">    for (var i = n; i &gt;= 1; i--) &#123;</span><br><span class="line">        result *= i;</span><br><span class="line">    &#125;</span><br><span class="line">    show.value = result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="删除处理"><a href="#删除处理" class="headerlink" title="删除处理"></a>删除处理</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$function shanchu() &#123;//删除处理</span><br><span class="line">    var show = document.getElementById(&quot;show&quot;);</span><br><span class="line">    var result = &quot;&quot;;</span><br><span class="line">    for (var i = 0; i &lt; show.value.length - 1; i++) &#123;</span><br><span class="line">        result += show.value[i];</span><br><span class="line">    &#125; show.value = result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="括号匹配的检查"><a href="#括号匹配的检查" class="headerlink" title="括号匹配的检查"></a>括号匹配的检查</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ function pipei() &#123;//括号匹配的检查</span><br><span class="line">    var a = [];</span><br><span class="line">    a.push(&quot;#&quot;);</span><br><span class="line">    var s = document.getElementById(&quot;show&quot;).value;</span><br><span class="line">    if (s == &quot;&quot;) &#123;</span><br><span class="line">        alert(&quot;请输入东西后提交&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        for (i = 0; i &lt; s.length; i++) &#123;</span><br><span class="line">            if (s[i] == &quot;(&quot;) &#123;</span><br><span class="line">                a.push(s[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                if (s[i] == &quot;)&quot;) &#123;</span><br><span class="line">                    var b = a.pop();</span><br><span class="line">                    if (b != &quot;(&quot;) &#123;</span><br><span class="line">                        alert(&quot;括号不匹配，请检查&quot;);</span><br><span class="line">                        return 0;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (a.pop() != &quot;#&quot;) &#123;</span><br><span class="line">            alert(&quot;括号不匹配，请检查&quot;);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="在最后附上一个直接计算的函数，也就是中缀直接计算的函数，并且在备注里，我用了“12-3-1”的例子走了一遍函数，下面是部分代码"><a href="#在最后附上一个直接计算的函数，也就是中缀直接计算的函数，并且在备注里，我用了“12-3-1”的例子走了一遍函数，下面是部分代码" class="headerlink" title="在最后附上一个直接计算的函数，也就是中缀直接计算的函数，并且在备注里，我用了“12.3+1”的例子走了一遍函数，下面是部分代码"></a>在最后附上一个直接计算的函数，也就是中缀直接计算的函数，并且在备注里，我用了“12.3+1”的例子走了一遍函数，下面是部分代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">$function infix2(str)&#123;</span><br><span class="line">                var sign = [];//运算数组</span><br><span class="line">                var result = [];//结果数组</span><br><span class="line">                sign.push(&quot;#&quot;);//在栈底放入一个#，遇到#代表到底了</span><br><span class="line">                var didi = &quot;&quot;;//这个空的字符串是来装你的多位数和带小数点的数的，最后把它变成数去计算</span><br><span class="line">                var flag=0;//这里需要一个标志位，那么这个标志位是干什么的呢</span><br><span class="line">                //就是用来判断符号前面的数得进去</span><br><span class="line">                //让我们举一个例子12.3+1，用它走一遍</span><br><span class="line">                for(var i = 0;i&lt;str.length;i++)&#123;//判断数字，注意你打的是字符串要转化成数字</span><br><span class="line">                   if(!isNaN(parseFloat(str[i]))||str[i]==&apos;.&apos;)&#123;//js判断是不是数字的方法!isNaN(x),如果判断不是数字isNaN(x)</span><br><span class="line">                       //依次判断它是不是数字或者是是不是小数点，若是数字，你要判断下一位是不是数如果也是数就像12，</span><br><span class="line">                       //他就不是个位数了，进入下面的判断</span><br><span class="line">                       //第二次循环：到2，是数进入下面的判断</span><br><span class="line">                       //第三次循环到“.”进入下面的判断</span><br><span class="line">                       //第四次循环到3,是数进入下面的判断</span><br><span class="line">                       //第五次循环到“+”,不能进入下面的判断跳到有五角星的地方</span><br><span class="line">                       //第六次循环到“1”是数进入下面的判断</span><br><span class="line">                    if(!isNaN(parseFloat(str[i+1]))||str[i+1]==&apos;.&apos;||flag==1)&#123;</span><br><span class="line">                        //判断1后面的2,2是数往下走；</span><br><span class="line">                        //2后面是“.”，依旧把2往didi里面放</span><br><span class="line">                        //“.”后面是3。往didi里面放“.”</span><br><span class="line">                        //3后面是“+”，但是他flag==1，往didi里面放“.”;********超级重要，这里就是知道flag的作用了吧********</span><br><span class="line">                        //“+”后面是1, 不进入这个判断，到三角号这里</span><br><span class="line">                        didi=didi+str[i];//让你的空字符里面进入1，先把本位存进去，</span><br><span class="line">                        //有人会问了，为什么不直接把本位存进去，而是要判断一下他的后一位是不是数或者小数点呢</span><br><span class="line">                        //因为如果你把本位存进去进那么如果他下一位还是数字，那么他就会像是“1”，“2”是两个字符，转成数字会是分开的数字</span><br><span class="line">                        flag=1;//把flag置为1</span><br><span class="line">                        //</span><br><span class="line">                        if(isNaN(parseFloat(str[i+1]))&amp;&amp;str[i+1]!=&apos;.&apos;)&#123;//★★★★★★</span><br><span class="line">                            //既不是数又不是“.”，那不就是运算符嘛，是运算符就直接进入结果栈；</span><br><span class="line">                            //第一次12.3不走这里</span><br><span class="line">                            //第二次不走这里</span><br><span class="line">                            //第三次不走这里</span><br><span class="line">                            //第四次不走这里</span><br><span class="line">                            //第五次走这里</span><br><span class="line">                            result.push(parseFloat(didi));</span><br><span class="line">                            didi=&quot;&quot;;//注意要让每次暂存的空字符didi变空，因为如果不变空的话例如12.3你要是在写个小数例如+3.6，</span><br><span class="line">                            //那他就会变成“12.33.6”这个是啥？所以避免这种情况，让它为空。</span><br><span class="line">                            flag=0;//每次完事后将标志符重新变回0，方便下次记数。</span><br><span class="line">                        &#125;</span><br><span class="line">                       &#125;</span><br><span class="line">                       else&#123;//▲▲▲▲▲▲▲▲▲▲▲▲</span><br><span class="line">                           result.push(parseFloat(str[i]));//是据放入结果栈</span><br><span class="line">                           //最后直接把“1”放入栈</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;  </span><br><span class="line">                   else&#123;//开始判断运算符</span><br><span class="line">                       if(str[i]==&apos;(&apos;)&#123;//是“（ ”直接放入运算符栈</span><br><span class="line">                           sign.push(str[i]);</span><br><span class="line">                        &#125;</span><br><span class="line">                       else if(str[i]==&apos;)&apos;)&#123;//是“ ）”把到“（ ”之间的全都出栈到结果栈</span><br><span class="line">                            while(sign[sign.length-1]!=&apos;(&apos;)&#123;//这里略有不同，就是结果栈里有元素的时候直接运算</span><br><span class="line">                                var b=result.pop();//是结果栈顶的第一个元素先出来</span><br><span class="line">                                var a=result.pop();//就是栈顶后面的元素，即就是运算符前相邻的两个数运算</span><br><span class="line">                                var c=sign.pop();//这个是从运算域出一个运算符来运算</span><br><span class="line">                                switch(c)&#123;</span><br><span class="line">                                case &apos;+&apos;:result.push(a+b);</span><br><span class="line">                                break;</span><br><span class="line">                                case &apos;-&apos;:result.push(a-b);//+和*倒是没有什么，/和-要注意是后来的数去运算前面的</span><br><span class="line">                                break;</span><br><span class="line">                                case &apos;*&apos;:result.push(a*b);</span><br><span class="line">                                break;</span><br><span class="line">                                case &apos;/&apos;://异常处理不能除以0，也就是后出栈内个不能是零******</span><br><span class="line">                                if(b==0)&#123;</span><br><span class="line">                                    alert(&quot;不能除零&quot;);</span><br><span class="line">                                    return &quot;∞&quot;;</span><br><span class="line">                                &#125;</span><br><span class="line">                                else&#123;</span><br><span class="line">                                    result.push(a/b);</span><br><span class="line">                                &#125;</span><br><span class="line">                                 break;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                            sign.pop();</span><br><span class="line">                        &#125;</span><br><span class="line">                        else&#123;</span><br><span class="line">                            var daxiao=get(sign[sign.length-1],str[i])//比较栈顶元素sign[sign.length-1]与要入栈元素</span><br><span class="line">                            if(daxiao==-1)&#123;//后来的元素大，直接放入栈</span><br><span class="line">                                sign.push(str[i]);</span><br><span class="line">                            &#125;</span><br><span class="line">                            else if(daxiao&gt;=0)&#123;//其余情况不是后面的小就是一样，那么需要把比你后来大的运算符出栈到结果栈</span><br><span class="line">                                do&#123;//这回是直接出去一个运算符就直接运算，直到运算符不再往结果域去</span><br><span class="line">                                    var b=result.pop();//是栈顶的元素</span><br><span class="line">                                    var a=result.pop();//就是栈顶后面的元素，即就是运算符前相邻的两个数运算</span><br><span class="line">                                    var c=sign.pop();</span><br><span class="line">                                    switch(c)&#123;</span><br><span class="line">                                    case &apos;+&apos;:result.push(a+b);</span><br><span class="line">                                    break;</span><br><span class="line">                                    case &apos;-&apos;:result.push(a-b);//+和*倒是没有什么，/和-要注意是后来的数去运算前面的</span><br><span class="line">                                    break;</span><br><span class="line">                                    case &apos;*&apos;:result.push(a*b);</span><br><span class="line">                                    break;</span><br><span class="line">                                    case &apos;/&apos;:</span><br><span class="line">                                    if(b==0)&#123;</span><br><span class="line">                                        alert(&quot;不能除零&quot;);</span><br><span class="line">                                        return &quot;∞&quot;;</span><br><span class="line">                                    &#125;</span><br><span class="line">                                else&#123;</span><br><span class="line">                                    result.push(a/b);</span><br><span class="line">                                &#125;</span><br><span class="line">                                 break;</span><br><span class="line">                                &#125;</span><br><span class="line">                                    &#125;</span><br><span class="line">                                while(get(sign[sign.length-1],str[i])&gt;0);//满足里面的大就进入循环，不大跳出来</span><br><span class="line">                                sign.push(str[i]);//最后你要把你想放进去的运算符最后放进去</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                return (result[0]).toFixed(3);//最后把后缀表达式写出来</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
