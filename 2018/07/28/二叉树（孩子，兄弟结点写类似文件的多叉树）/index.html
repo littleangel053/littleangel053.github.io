@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      post二叉树（孩子，兄弟结点写类似文件的多叉树） | 管安琪de博客 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="管安琪">
+    
+    
+
+    <meta name="description" content="本次我们要利用二插树来模拟写一个多叉树首先我们先定义一个节点和一棵树1234567891011121314$   function Node(element) &amp;#123;        this.element = element;        this.child = null;        this.borther = null;        this.parent = null;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="post二叉树（孩子，兄弟结点写类似文件的多叉树） | 管安琪de博客">
+<meta property="og:url" content="http://yoursite.com/2018/07/28/二叉树（孩子，兄弟结点写类似文件的多叉树）/index.html">
+<meta property="og:site_name" content="管安琪de博客">
+<meta property="og:description" content="本次我们要利用二插树来模拟写一个多叉树首先我们先定义一个节点和一棵树1234567891011121314$   function Node(element) &amp;#123;        this.element = element;        this.child = null;        this.borther = null;        this.parent = null;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-28T08:56:06.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="post二叉树（孩子，兄弟结点写类似文件的多叉树） | 管安琪de博客">
+<meta name="twitter:description" content="本次我们要利用二插树来模拟写一个多叉树首先我们先定义一个节点和一棵树1234567891011121314$   function Node(element) &amp;#123;        this.element = element;        this.child = null;        this.borther = null;        this.parent = null;">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">管安琪de博客</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">post二叉树（孩子，兄弟结点写类似文件的多叉树）</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-07-28" class="post-meta__date date">2018-07-28</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h4 id="本次我们要利用二插树来模拟写一个多叉树"><a href="#本次我们要利用二插树来模拟写一个多叉树" class="headerlink" title="本次我们要利用二插树来模拟写一个多叉树"></a>本次我们要利用二插树来模拟写一个多叉树</h4><h5 id="首先我们先定义一个节点和一棵树"><a href="#首先我们先定义一个节点和一棵树" class="headerlink" title="首先我们先定义一个节点和一棵树"></a>首先我们先定义一个节点和一棵树</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$   function Node(element) &#123;</span><br><span class="line">        this.element = element;</span><br><span class="line">        this.child = null;</span><br><span class="line">        this.borther = null;</span><br><span class="line">        this.parent = null;</span><br><span class="line">    &#125;</span><br><span class="line">    function Tree() &#123;</span><br><span class="line">        this.root = new Node(&quot;root&quot;);</span><br><span class="line">        this.find = find;</span><br><span class="line">        this.insert = insert;</span><br><span class="line">        this.remove = remove;</span><br><span class="line">        this.show = show;</span><br><span class="line">        this.bianli = bianli;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="紧接着我们要实现对其的增删改查-首先我们写一个查找函数，但是这棵树是没有序的，所以你得去遍历输出，这里用中序遍历举例"><a href="#紧接着我们要实现对其的增删改查-首先我们写一个查找函数，但是这棵树是没有序的，所以你得去遍历输出，这里用中序遍历举例" class="headerlink" title="紧接着我们要实现对其的增删改查,首先我们写一个查找函数，但是这棵树是没有序的，所以你得去遍历输出，这里用中序遍历举例"></a>紧接着我们要实现对其的增删改查,首先我们写一个查找函数，但是这棵树是没有序的，所以你得去遍历输出，这里用中序遍历举例</h5><h6 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$      var flag = new Node(&quot; &quot;);</span><br><span class="line">    function bianli(node, num) &#123;</span><br><span class="line">        if (node) &#123;</span><br><span class="line">            bianli(node.child, num);</span><br><span class="line">            if (node.element == num) &#123;</span><br><span class="line">                flag = node;//你得设一个全局的标志位，用flag记录遍历所找到的</span><br><span class="line">            &#125;</span><br><span class="line">            bianli(node.borther, num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    function find(num) &#123;</span><br><span class="line">        this.bianli(this.root, num);//找到返回的flag</span><br><span class="line">        return flag;</span><br><span class="line">    &#125;</span><br><span class="line">```    </span><br><span class="line">###### 插入</span><br><span class="line">```bush</span><br><span class="line">$    function insert(parentElement, newElement) &#123;//传入父亲节点和你要新插入的节点</span><br><span class="line">        var current = this.root;</span><br><span class="line">        var newNode = new Node(newElement);</span><br><span class="line">        var parentNode = this.find(parentElement);</span><br><span class="line">        if (parentNode.child == null) &#123;//你找的父亲节点没有孩子的话就直接插入</span><br><span class="line">            parentNode.child = newNode;//让父亲的孩子直接是它</span><br><span class="line">            newNode.parent = parentNode;//它的爸爸的parentNode.child</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;//另一种情况是父亲节点有孩子，那么你插的就会成父亲节点的孩子的兄弟，并且你得把child；parent；borther的指针都得让他有所属</span><br><span class="line">            newNode.borther = parentNode.child;//采用头插，新插入的节点的兄弟是父亲节点的孩子</span><br><span class="line">            parentNode.child = newNode;//新插入的节点变成了父亲节点的孩子</span><br><span class="line">            newNode.parent = parentNode;//新插入的节点的父亲指针域是parentNode</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$     function remove(element)&#123;</span><br><span class="line">        var a = this.find(element);//通过find函数找到要删的</span><br><span class="line">        if(a.parent==null)&#123;//你自己定义的假根不能删，类似于单链表的head节点，让他每次去往这个根上面插就好</span><br><span class="line">            alert(&quot;不能删根&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;//其余的，分两种情况，一个是删除兄弟；一个是删孩子</span><br><span class="line">            if(a==a.parent.child)&#123;//删孩子</span><br><span class="line">                 a.parent.child=a.borther;//让本来指向这个孩子的节点指向他的兄弟</span><br><span class="line">            &#125;</span><br><span class="line">           else&#123;//删兄弟</span><br><span class="line">               var current=a.parent.child;</span><br><span class="line">                while(current.borther!=a)&#123;//找你要删掉的兄弟，找不到就继续网下扫兄弟</span><br><span class="line">                    current=current.borther;</span><br><span class="line">                &#125;</span><br><span class="line">                current.borther=current.borther.borther;//让本来指向的兄弟指针指向兄弟的兄弟，就越过一个兄弟</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="最后是一个简单的show函数的显示"><a href="#最后是一个简单的show函数的显示" class="headerlink" title="最后是一个简单的show函数的显示"></a>最后是一个简单的show函数的显示</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$   function show(parentElement) &#123;</span><br><span class="line">        var current= parentElement.child;//找到你输入的父亲节点的孩子</span><br><span class="line">        while(current)&#123;//找到了这个节点</span><br><span class="line">            console.log(current);//先打印这个本节点（你输入的父亲节点的孩子）</span><br><span class="line">            current=current.borther;//每次打印出同辈兄弟</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
